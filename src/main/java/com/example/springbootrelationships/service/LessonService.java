@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public interface LessonService {
     LessonResponse addLesson(LessonDTO lessonDTO);
 
-    Lesson getLessonLessonName(String lesson_name);
+    Lesson getLessonId(Long lessonId);
 
 
 }

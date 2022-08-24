@@ -6,6 +6,8 @@ import com.example.springbootrelationships.mapper.LessonMapper;
 import com.example.springbootrelationships.model.Student;
 import com.example.springbootrelationships.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +23,8 @@ public class StudentController {
     LessonMapper lessonMapper;
 
     @PostMapping("/create")
-    public Student createStudent(@RequestBody StudentDTO studentDTO) {
-        Student studentResponse = studentService.addStudent(studentDTO);
-        studentResponse.setLessonList(lessonMapper.lessonToLessonResponseList(studentResponse.getLessonList()));
-        return studentResponse;
+    public ResponseEntity<StudentResponse> createStudent(@RequestBody  StudentDTO studentDTO){
+    StudentResponse studentResponse = studentService.addStudent(studentDTO);
+    return new ResponseEntity<>(studentResponse , HttpStatus.OK);
     }
-
 }

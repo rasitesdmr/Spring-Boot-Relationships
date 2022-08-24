@@ -33,7 +33,10 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public Lesson getLessonLessonName(String lesson_name) {
-        return new Lesson();
+    public Lesson getLessonId(Long lessonId) {
+        return lessonRepository.
+                findById(lessonId).
+                orElseThrow(()-> new IllegalArgumentException(lessonId + "hata"));
     }
+
 }

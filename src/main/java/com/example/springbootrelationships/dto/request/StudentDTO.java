@@ -21,7 +21,7 @@ public class StudentDTO {
 
     private Long school_id;
 
-    private List<Lesson> lessonList;
+    private List<Long> lessonIdList;
 
 
 

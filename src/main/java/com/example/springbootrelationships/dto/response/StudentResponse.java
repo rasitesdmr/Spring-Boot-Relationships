@@ -11,6 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 public class StudentResponse {
 
+    private Long student_id;
+
     private String first_name;
 
     private String last_name;
