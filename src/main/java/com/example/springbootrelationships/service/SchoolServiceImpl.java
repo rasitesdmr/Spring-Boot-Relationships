@@ -18,9 +18,7 @@ public class SchoolServiceImpl implements SchoolService {
 
     @Override
     public SchoolResponse addSchool(SchoolDTO schoolDTO) {
-        School school = new School();
-        school.setSchool_name(schoolDTO.getSchool_name());
-        school.setType_of_school(schoolDTO.getType_of_school());
+        School school = schoolMapper.schoolDTOToSchool(schoolDTO);
         schoolRepository.save(school);
         return schoolMapper.schoolToSchoolResponse(school);
     }

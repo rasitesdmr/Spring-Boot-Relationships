@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.mapstruct.EnumMapping;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,7 +23,8 @@ public class School {
 
     private String school_name;
 
-    private String type_of_school;
+    @Enumerated(EnumType.ORDINAL)
+    private TypeSchool type_of_school;
 
     @OneToMany(mappedBy = "school")
     private List<Student>studentList;

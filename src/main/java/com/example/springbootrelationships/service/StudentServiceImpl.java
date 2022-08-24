@@ -3,21 +3,15 @@ package com.example.springbootrelationships.service;
 import com.example.springbootrelationships.dto.request.StudentDTO;
 import com.example.springbootrelationships.dto.response.StudentResponse;
 import com.example.springbootrelationships.exception.StudentNumberAlreadyExistsException;
-import com.example.springbootrelationships.mapper.SchoolMapper;
 import com.example.springbootrelationships.mapper.StudentMapper;
 import com.example.springbootrelationships.model.Lesson;
 import com.example.springbootrelationships.model.School;
 import com.example.springbootrelationships.model.Student;
-import com.example.springbootrelationships.repository.LessonRepository;
-import com.example.springbootrelationships.repository.SchoolRepository;
 import com.example.springbootrelationships.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -34,6 +28,13 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentResponse addStudent(StudentDTO studentDTO) {
+
+    /*    // TODO : Bakılacak
+        Optional<Student> student1 = studentRepository.student_number(studentDTO.getStudent_number());
+        if (student1.isPresent()) {
+            throw new StudentNumberAlreadyExistsException();
+        }
+    */
         Student student = studentMapper.studentDTOToStudent(studentDTO);
 
         List<Lesson> lessonList = new ArrayList<>();
@@ -45,6 +46,7 @@ public class StudentServiceImpl implements StudentService {
         School school = schoolService.getSchoolId(studentDTO.getSchool_id());
         student.setSchool(school);
 
+
         return studentMapper.studentToStudentResponse(studentRepository.save(student));
     }
 }
@@ -52,7 +54,7 @@ public class StudentServiceImpl implements StudentService {
 
 /*
 
-        //TODO validation uygulanacak .
+
         if (studentDTO.getSchool_id() == null) {
             throw new IllegalArgumentException("öğrencinin school_id 'sine ihtiyacı var.");
         }

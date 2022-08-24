@@ -19,16 +19,8 @@ public class LessonServiceImpl implements LessonService {
 
     @Override
     public LessonResponse addLesson(LessonDTO lessonDTO) {
-        Lesson lesson = new Lesson();
-        lesson.setLesson_name(lessonDTO.getLesson_name());
-        lesson.setLesson_code(lessonDTO.getLesson_code());
-        lesson.setCourse_language(lessonDTO.getCourse_language());
+        Lesson lesson = lessonMapper.lessonDTOToLesson(lessonDTO);
         lessonRepository.save(lesson);
-        //LessonResponse lessonResponse= new LessonResponse();
-        //lessonResponse.setLesson_name(lesson.getLesson_name());
-        //lessonResponse.setLesson_code(lesson.getLesson_code());
-        //lessonResponse.setCourse_language(lesson.getCourse_language());
-        //return lessonResponse;
         return lessonMapper.lessonToLessonResponse(lesson);
     }
 

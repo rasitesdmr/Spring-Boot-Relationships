@@ -1,10 +1,13 @@
 package com.example.springbootrelationships.dto.response;
 
 import com.example.springbootrelationships.model.Student;
+import com.example.springbootrelationships.model.TypeSchool;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.List;
 
 @Data
@@ -14,7 +17,8 @@ public class SchoolResponse {
 
     private String school_name;
 
-    private String type_of_school;
+    @Enumerated(EnumType.ORDINAL)
+    private TypeSchool type_of_school;
 
     private List<Student> studentList;
 }
