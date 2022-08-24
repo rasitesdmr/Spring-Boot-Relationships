@@ -2,6 +2,8 @@ package com.example.springbootrelationships.service;
 
 import com.example.springbootrelationships.dto.request.StudentDTO;
 import com.example.springbootrelationships.dto.response.StudentResponse;
+import com.example.springbootrelationships.exception.StudentNumberAlreadyExistsException;
+import com.example.springbootrelationships.mapper.SchoolMapper;
 import com.example.springbootrelationships.mapper.StudentMapper;
 import com.example.springbootrelationships.model.Lesson;
 import com.example.springbootrelationships.model.School;
@@ -22,51 +24,34 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     StudentRepository studentRepository;
-
-    @Autowired
-    SchoolRepository schoolRepository;
-
     @Autowired
     StudentMapper studentMapper;
-
-    @Autowired
-    LessonRepository lessonRepository;
-
     @Autowired
     LessonService lessonService;
-
     @Autowired
     SchoolService schoolService;
 
 
     @Override
     public StudentResponse addStudent(StudentDTO studentDTO) {
-        Student student = new Student();
-        student.setFirst_name(studentDTO.getFirst_name());
-        student.setLast_name(studentDTO.getLast_name());
-        student.setStudent_number(studentDTO.getStudent_number());
-        if (studentDTO.getLessonIdList().isEmpty()) {
-            throw new IllegalArgumentException("En az bir ders girilmek zorunda ");
+        Student student = studentMapper.studentDTOToStudent(studentDTO);
 
-        } else {
-            List<Lesson> lessonList = new ArrayList<>();
-            for (Long lessonId : studentDTO.getLessonIdList()) {
-                Lesson lesson = lessonService.getLessonId(lessonId);
-                lessonList.add(lesson);
-            }
-            student.setLessonList(lessonList);
+        List<Lesson> lessonList = new ArrayList<>();
+        for (Long lessonId : studentDTO.getLessonIdList()) {
+            Lesson lesson = lessonService.getLessonId(lessonId);
+            lessonList.add(lesson);
         }
-        if (studentDTO.getSchool_id() == null) {
-            throw new IllegalArgumentException("okul id girilmek zorunda ");
-        }
+        student.setLessonList(lessonList);
         School school = schoolService.getSchoolId(studentDTO.getSchool_id());
         student.setSchool(school);
 
-        Student student1 = studentRepository.save(student);
-        return studentMapper.studentToStudentResponse(student1);
+        return studentMapper.studentToStudentResponse(studentRepository.save(student));
+    }
+}
 
 
-        /*
+/*
+
         //TODO validation uygulanacak .
         if (studentDTO.getSchool_id() == null) {
             throw new IllegalArgumentException("öğrencinin school_id 'sine ihtiyacı var.");
@@ -87,5 +72,4 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.save(student);
 
 */
-    }
-}
+
