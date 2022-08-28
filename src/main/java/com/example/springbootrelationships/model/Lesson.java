@@ -2,6 +2,8 @@ package com.example.springbootrelationships.model;
 
 import com.example.springbootrelationships.dto.request.LessonDTO;
 import com.example.springbootrelationships.dto.request.StudentDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,9 +32,9 @@ public class Lesson {
 
     private String course_language;
 
-    @ManyToMany(mappedBy = "lessonList")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "lessonList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Student> studentList = new ArrayList<>();
-
 
 
 }

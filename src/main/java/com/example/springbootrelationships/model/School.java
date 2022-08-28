@@ -1,5 +1,6 @@
 package com.example.springbootrelationships.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,7 @@ public class School {
     @Enumerated(EnumType.ORDINAL)
     private TypeSchool type_of_school;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "school")
     private List<Student>studentList;
 

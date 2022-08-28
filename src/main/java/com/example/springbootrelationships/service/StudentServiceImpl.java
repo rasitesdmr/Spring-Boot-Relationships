@@ -34,8 +34,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentResponse addStudent(StudentDTO studentDTO) {
+        System.out.println();
         Student student = studentMapper.studentDTOToStudent(studentDTO);
-
         List<Lesson> lessonList = new ArrayList<>();
         for (Long lessonId : studentDTO.getLessonIdList()) {
             Lesson lesson = lessonService.getLessonId(lessonId);
@@ -49,27 +49,4 @@ public class StudentServiceImpl implements StudentService {
     }
 }
 
-
-/*
-
-        //TODO validation uygulanacak .
-        if (studentDTO.getSchool_id() == null) {
-            throw new IllegalArgumentException("öğrencinin school_id 'sine ihtiyacı var.");
-        }
-        School school = schoolRepository.findById(studentDTO.getSchool_id()).orElseThrow(() -> new IllegalArgumentException(
-                studentDTO.getSchool_id() + " could not be found"));
-        student.setSchool(school);
-        //studentMapper.studentToStudentResponse(student);
-        List<Lesson> lessonList = new ArrayList<>();
-        studentDTO.getLessonList().forEach(lesson -> {
-            lessonRepository.findById(lesson.getLesson_id()).orElseThrow(()->new IllegalArgumentException(
-                    lesson.getLesson_id() + " could not be found"));
-            lessonList.add(lesson);
-        });
-
-        student.setLessonList(lessonList);
-
-        return studentRepository.save(student);
-
-*/
 

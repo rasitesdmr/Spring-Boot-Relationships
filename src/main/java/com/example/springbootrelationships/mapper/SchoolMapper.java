@@ -12,5 +12,4 @@ public interface SchoolMapper {
 
     SchoolResponse schoolToSchoolResponse(School school);
     School schoolDTOToSchool(SchoolDTO schoolDTO);
-    List<SchoolResponse> schoolToSchoolResponseList(List<School> schoolList);
 }

@@ -1,5 +1,7 @@
 package com.example.springbootrelationships.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,12 +29,12 @@ public class Student {
 
     private int student_number;
 
-
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "school_id")
     private School school;
-
-    @ManyToMany()
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "student_lesson" ,
             joinColumns = @JoinColumn(name = "student_id") ,
             inverseJoinColumns = @JoinColumn(name = "lesson_id"))

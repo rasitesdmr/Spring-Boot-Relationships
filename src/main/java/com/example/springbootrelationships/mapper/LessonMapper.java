@@ -14,6 +14,5 @@ public interface LessonMapper {
 
     Lesson lessonDTOToLesson(LessonDTO lessonDTO);
 
-    List<Lesson> lessonToLessonResponseList(List<Lesson> lessonList);
 
 }

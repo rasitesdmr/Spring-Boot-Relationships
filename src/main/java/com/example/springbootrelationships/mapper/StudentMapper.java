@@ -13,5 +13,4 @@ public interface StudentMapper {
     StudentResponse studentToStudentResponse(Student student);
 
     Student studentDTOToStudent(StudentDTO studentDTO);
-    List<StudentResponse> studentToStudentResponseList(List<Student>studentList);
 }
