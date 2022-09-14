@@ -5,8 +5,11 @@ import com.example.springbootrelationships.dto.response.StudentResponse;
 import com.example.springbootrelationships.model.Student;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface StudentService {
-    StudentResponse addStudent(StudentDTO studentDTO);
+    StudentResponse saveStudent(StudentDTO studentDTO);
+    List<Student> findAllStudent();
 
 }

@@ -27,4 +27,5 @@ public class SchoolControllerAspect {
         logger.info("Value :" + value);
         return value;
     }
+
 }

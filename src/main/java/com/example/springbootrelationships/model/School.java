@@ -1,11 +1,11 @@
 package com.example.springbootrelationships.model;
 
+import com.example.springbootrelationships.enums.schoolEnum.TypeSchool;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.mapstruct.EnumMapping;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,7 +24,7 @@ public class School {
 
     private String school_name;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private TypeSchool type_of_school;
 
     @JsonManagedReference

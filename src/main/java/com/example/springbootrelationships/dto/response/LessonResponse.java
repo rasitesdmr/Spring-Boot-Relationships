@@ -1,11 +1,14 @@
 package com.example.springbootrelationships.dto.response;
 
+import com.example.springbootrelationships.enums.lessonEnum.TypeLanguage;
+import com.example.springbootrelationships.enums.lessonEnum.TypeLessonName;
 import com.example.springbootrelationships.model.Student;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Arrays;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.util.List;
 
 @Data
@@ -13,12 +16,12 @@ import java.util.List;
 @NoArgsConstructor
 public class LessonResponse {
 
-    private String lesson_name;
+    @Enumerated(EnumType.STRING)
+    private TypeLessonName lessonName;
 
-    private String lesson_code;
+    @Enumerated(EnumType.STRING)
+    private TypeLanguage course_language;
 
-    private String course_language;
-
-    private List<Student> school;
+  //  private List<Student> school;
 
 }

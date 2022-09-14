@@ -6,6 +6,7 @@ import com.example.springbootrelationships.model.Student;
 import org.mapstruct.Mapper;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface StudentMapper {
@@ -13,4 +14,6 @@ public interface StudentMapper {
     StudentResponse studentToStudentResponse(Student student);
 
     Student studentDTOToStudent(StudentDTO studentDTO);
+
+    List<StudentResponse> studentDTOToStudentList(List<Student> studentDTOList);
 }

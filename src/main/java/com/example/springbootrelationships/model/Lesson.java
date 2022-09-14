@@ -1,9 +1,8 @@
 package com.example.springbootrelationships.model;
 
-import com.example.springbootrelationships.dto.request.LessonDTO;
-import com.example.springbootrelationships.dto.request.StudentDTO;
+import com.example.springbootrelationships.enums.lessonEnum.TypeLanguage;
+import com.example.springbootrelationships.enums.lessonEnum.TypeLessonName;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +10,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -26,11 +24,11 @@ public class Lesson {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lesson_id;
 
-    private String lesson_name;
+    @Enumerated(EnumType.STRING)
+    private TypeLessonName lessonName;
 
-    private String lesson_code;
-
-    private String course_language;
+    @Enumerated(EnumType.STRING)
+    private TypeLanguage course_language;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "lessonList", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
