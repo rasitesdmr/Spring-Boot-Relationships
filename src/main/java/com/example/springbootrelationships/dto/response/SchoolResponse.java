@@ -1,6 +1,7 @@
 package com.example.springbootrelationships.dto.response;
 
 import com.example.springbootrelationships.enums.schoolEnum.TypeSchool;
+import com.example.springbootrelationships.enums.schoolEnum.TypeSchoolName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,8 @@ import javax.persistence.Enumerated;
 @NoArgsConstructor
 public class SchoolResponse {
 
-    private String school_name;
+    @Enumerated(EnumType.STRING)
+    private TypeSchoolName schoolName;
 
     @Enumerated(EnumType.STRING)
     private TypeSchool type_of_school;

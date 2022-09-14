@@ -2,6 +2,9 @@ package com.example.springbootrelationships.service;
 
 import com.example.springbootrelationships.dto.request.SchoolDTO;
 import com.example.springbootrelationships.dto.response.SchoolResponse;
+import com.example.springbootrelationships.enums.schoolEnum.TypeSchoolName;
+import com.example.springbootrelationships.exception.LessonNameAlreadyExistsException;
+import com.example.springbootrelationships.exception.SchoolNameAlreadyExistsException;
 import com.example.springbootrelationships.mapper.SchoolMapper;
 import com.example.springbootrelationships.model.School;
 import com.example.springbootrelationships.enums.schoolEnum.TypeSchool;
@@ -17,10 +20,16 @@ public class SchoolServiceImpl implements SchoolService {
     SchoolMapper schoolMapper;
 
     @Override
-    public SchoolResponse addSchool(SchoolDTO schoolDTO, TypeSchool typeSchool) {
+    public SchoolResponse addSchool(SchoolDTO schoolDTO, TypeSchool typeSchool,TypeSchoolName schoolName) {
+
+        if (schoolRepository.findBySchoolName(schoolDTO.getSchoolName()).isPresent()) {
+            throw new SchoolNameAlreadyExistsException();
+        }
         School school = schoolMapper.schoolDTOToSchool(schoolDTO);
         school.setType_of_school(typeSchool);
+        school.setSchoolName(schoolName);
         schoolRepository.save(school);
+
         return schoolMapper.schoolToSchoolResponse(school);
     }
 

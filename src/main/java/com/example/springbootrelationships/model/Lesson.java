@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "Lesson")
+@Table(name = "lesson")
 public class Lesson {
 
     @Id

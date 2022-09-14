@@ -6,6 +6,7 @@ import com.example.springbootrelationships.dto.response.StudentResponse;
 import com.example.springbootrelationships.model.Lesson;
 import com.example.springbootrelationships.model.Student;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public interface LessonMapper {
 
     LessonResponse lessonToLessonResponse(Lesson lesson);
-
+    @Mapping(target = "lessonName",source = "lessonName")
     Lesson lessonDTOToLesson(LessonDTO lessonDTO);
 
     List<LessonResponse> lessonDTOToLessonList(List<Lesson> lessonDTOList);

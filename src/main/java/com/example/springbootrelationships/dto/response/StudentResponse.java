@@ -17,7 +17,7 @@ public class StudentResponse {
 
     private String last_name;
 
-    private int student_number;
+    private int studentNumber;
 
     private School school;
 

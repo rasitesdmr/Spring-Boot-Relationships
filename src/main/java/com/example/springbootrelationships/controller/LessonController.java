@@ -2,11 +2,9 @@ package com.example.springbootrelationships.controller;
 
 import com.example.springbootrelationships.dto.request.LessonDTO;
 import com.example.springbootrelationships.dto.response.LessonResponse;
-import com.example.springbootrelationships.dto.response.StudentResponse;
 import com.example.springbootrelationships.enums.lessonEnum.TypeLanguage;
 import com.example.springbootrelationships.enums.lessonEnum.TypeLessonName;
 import com.example.springbootrelationships.mapper.LessonMapper;
-import com.example.springbootrelationships.model.Lesson;
 import com.example.springbootrelationships.service.LessonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,9 +24,9 @@ public class LessonController {
 
     @PostMapping("/create")
     public ResponseEntity<LessonResponse> createLesson(@RequestParam TypeLessonName typeLessonName,
-                                                       TypeLanguage typeLanguage,
-                                                       @RequestBody LessonDTO lessonDTO) {
-        LessonResponse lessonResponse = lessonService.addLesson(lessonDTO,typeLessonName,typeLanguage);
+                                                       TypeLanguage typeLanguage) {
+        LessonDTO lessonDTO = LessonDTO.builder().lessonName(typeLessonName).build();
+        LessonResponse lessonResponse = lessonService.addLesson(lessonDTO, typeLessonName, typeLanguage);
         return new ResponseEntity<>(lessonResponse, HttpStatus.OK);
 
     }

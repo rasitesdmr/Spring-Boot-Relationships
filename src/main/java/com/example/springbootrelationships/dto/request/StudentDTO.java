@@ -19,7 +19,7 @@ public class StudentDTO {
     @NotBlank(message = "last_name boş bırakılmaz")
     private String last_name;
     @NotBlank(message = "student_number boş bırakılmaz")
-    private int student_number;
+    private int studentNumber;
 
     @NotBlank
     private Long school_id;

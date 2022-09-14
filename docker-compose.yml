@@ -1,17 +1,17 @@
 version: "3.8"
 services:
-  mysqldb:
-    image: mysql:5.7
-    restart: always
+  postgresql:
+    image: postgres:10.4
     ports:
-      - "3307:3306"
+      - "5433:5432"
+    restart: always
     environment:
-      MYSQL_DATABASE: many
-      MYSQL_USER: rasit
-      MYSQL_PASSWORD: spring
-      MYSQL_ROOT_PASSWORD: spring
+      POSTGRES_USER: rasit
+      POSTGRES_PASSWORD: spring
+      POSTGRES_DB: many
     networks:
       - comment
+
 networks:
   comment:
     driver: bridge

@@ -2,6 +2,7 @@ package com.example.springbootrelationships.service;
 
 import com.example.springbootrelationships.dto.request.StudentDTO;
 import com.example.springbootrelationships.dto.response.StudentResponse;
+import com.example.springbootrelationships.exception.StudentNumberAlreadyExistsException;
 import com.example.springbootrelationships.mapper.StudentMapper;
 import com.example.springbootrelationships.model.Lesson;
 import com.example.springbootrelationships.model.School;
@@ -27,7 +28,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentResponse saveStudent(StudentDTO studentDTO) {
-        System.out.println();
+
+        if (studentRepository.findByStudentNumber(studentDTO.getStudentNumber()).isPresent()){
+            throw new StudentNumberAlreadyExistsException();
+        }
+
         Student student = studentMapper.studentDTOToStudent(studentDTO);
         List<Lesson> lessonList = new ArrayList<>();
         for (Long lessonId : studentDTO.getLessonIdList()) {
